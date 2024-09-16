@@ -53,7 +53,7 @@ Django จัดการ transaction ดังนี้:
 
 1. ทำการ opens transaction เมื่อมีการทำงานของ atomic block ตัวนอกสุด
 2. สร้าง savepoint เมื่อมีการเข้าทำงานใน atomic block ตัวใน
-3. ทำการ release หรือ roll back เมื่อออกจาก atomic ิblock ตัวใน
+3. ทำการ release หรือ roll back เมื่อออกจาก atomic block ตัวใน
 4. ทำการ commit หรือ roll back transaction เมื่ออกจาก atomic block ตัวนอกสุด
 
 ## Performing actions after commit

@@ -131,7 +131,7 @@ class Position(models.Model):
         return str(self.name)
 ```
 
-    5. แก้ไข setting DATABASES ใน `settings.y`
+    5. แก้ไข setting DATABASES ใน `settings.py`
 
 ```python
 DATABASES = {
