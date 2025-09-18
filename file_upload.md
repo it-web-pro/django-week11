@@ -9,6 +9,10 @@ Django จัดการ ไฟล์ file upload โดยบันทึก�
 ก่อนอื่นเราจะต้องเพิ่ม setting `MEDIA_URL` และ `MEDIA_ROOT`
 
 ```python
+import os
+
+...
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 ```
