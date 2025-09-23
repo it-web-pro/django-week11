@@ -12,7 +12,7 @@ templates/
 
 ## Part 1: File Field
 
-1.1 ให้ทำการเพิ่ม field ใน model `StudentProfile` สำหรับข้อมูล `image` (ดังใน code ด้านล่าง) จากนั้นแก้ไข views, forms เพื่อสร้าง และแก้ไข student ให้บันทึกข้อมูลลงทั้งในตาราง `student` และ `studentprofile`
+1.1 ให้ทำการเพิ่ม field ใน model `StudentProfile` สำหรับข้อมูล `image` (ดังใน code ด้านล่าง) จากนั้นแก้ไข views, forms เพื่อสร้าง และแก้ไข student ให้บันทึกข้อมูลลงทั้งในตาราง `student` และ `studentprofile` (0.5 คะแนน)
 
 ```python
 class StudentProfile(models.Model):
@@ -21,15 +21,15 @@ class StudentProfile(models.Model):
     image = models.FileField(upload_to="image/", blank=True, null=True)
 ```
 
-1.2 ในหน้าแสดงข้อมูลของ student ให้เพิ่มคอลัมสำหรับแสดงรูปภาพของ student ดังนี้ หาก student ไม่มีข้อมูล image ให้ทำการแสดงรูปภาพ `no-image.png` ที่อยู่ใน Folder static
+1.2 ในหน้าแสดงข้อมูลของ student ให้เพิ่มคอลัมสำหรับแสดงรูปภาพของ student ดังนี้ หาก student ไม่มีข้อมูล image ให้ทำการแสดงรูปภาพ `no-image.png` ที่อยู่ใน Folder static (0.5 คะแนน)
 
 ![img1-2](images/img1-2.png)
 
-1.3 ในหน้า `create_student` ให้แสดงช่องในการอัพโหลดรูป และเมื่ออัพโหลดรูปเข้าไปแสดง preview ของรูปด้วย เมื่อทำการสร้างสำเร็จให้กลับไปหน้าแสดงข้อมูล student
+1.3 ในหน้า `create_student` ให้แสดงช่องในการอัพโหลดรูป และเมื่ออัพโหลดรูปเข้าไปแสดง preview ของรูปด้วย เมื่อทำการสร้างสำเร็จให้กลับไปหน้าแสดงข้อมูล student (0.5 คะแนน)
 
 ![img1-3-1](images/img1-3-1.png)
 
-1.4 ในหน้า `update_student` หาก student ที่เลือกนั้นมีรูปอยู่แล้วให้ทำการแสดงรูปของ student ด้วย และเมื่ออัพโหลดรูปเข้าไป ให้ทำการอัพเดททับรูปเก่า เมื่อทำการอัพเดทข้อมูลสำเร็จให้กลับไปหน้าแสดงข้อมูล student
+1.4 ในหน้า `update_student` หาก student ที่เลือกนั้นมีรูปอยู่แล้วให้ทำการแสดงรูปของ student ด้วย และเมื่ออัพโหลดรูปเข้าไป ให้ทำการอัพเดททับรูปเก่า เมื่อทำการอัพเดทข้อมูลสำเร็จให้กลับไปหน้าแสดงข้อมูล student (0.5 คะแนน)
 
 ![img1-4](images/img1-4.png)
 
@@ -39,7 +39,7 @@ class StudentProfile(models.Model):
 
 ใน Part 2 เราจะมาลองใช้งาน **Transaction** ของ Django เพื่อให้การสร้างและอัพเดท Student/StudentProfile เกิดขึ้นเป็น atomic operation คือ **สำเร็จทั้งคู่ หรือ rollback ทั้งคู่**
 
-### 2.1 การสร้าง Student พร้อม StudentProfile
+### 2.1 การสร้าง Student พร้อม StudentProfile (1 คะแนน)
 
 - ให้แก้ไข `StudentCreate` view
 - ใช้ `transaction.atomic()` ครอบการทำงานของ `student.save()` และ `studentprofile.save()`
@@ -72,3 +72,4 @@ except Exception:
 - ถ้า form ทั้งคู่ valid → ข้อมูลถูกบันทึกทั้ง Student และ StudentProfile
 - ถ้ามี error form ใด form หนึ่ง → ไม่มีข้อมูลถูกบันทึก (rollback)
 - กลับไปหน้าแสดงรายชื่อนักเรียนทั้งหมด หลังบันทึกสำเร็จ
+
