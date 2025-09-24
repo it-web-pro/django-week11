@@ -17,6 +17,20 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 ```
 
+เพิ่ม media paths ใน `urls.py`
+
+```python
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # Project url patterns...
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
 ## TOTURIAL
 
 ### Simple File Upload
@@ -51,8 +65,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
   {% if uploaded_file_url %}
     <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
   {% endif %}
-
-  <p><a href="{% url 'home' %}">Return to home</a></p>
+  
   </body>
 </html>
 ```
@@ -70,10 +83,10 @@ def simple_upload(request):
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.url(filename)
-        return render(request, 'core/simple_upload.html', {
+        return render(request, 'simple_upload.html', {
             'uploaded_file_url': uploaded_file_url
         })
-    return render(request, 'core/simple_upload.html')
+    return render(request, 'simple_upload.html')
 ```
 
 ### File Upload With Model Forms
@@ -111,10 +124,9 @@ def model_form_upload(request):
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('home')
     else:
         form = DocumentForm()
-    return render(request, 'core/model_form_upload.html', {
+    return render(request, 'model_form_upload.html', {
         'form': form
     })
 ```

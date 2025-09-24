@@ -36,6 +36,9 @@ def viewfunc(request):
 วิธีที่ถูกต้องถ้าเราต้องการ catch exception คือ
 
 ```python
+from django.db import transaction
+from django.db.utils import IntegrityError
+
 @transaction.atomic
 def viewfunc(request):
     create_parent()
@@ -87,6 +90,8 @@ for user in users:
 2. เรามาลองดูแบบไม่ใช้งาน transaction กันเพิ่ม code นี้ใน `account/models.py`
 
 ```python
+from django.core.exceptions import ObjectDoesNotExist
+
 class Account(models.Model):
     owner = models.CharField(max_length=100)
     account_no = models.CharField(max_length=20)
@@ -98,12 +103,12 @@ class Account(models.Model):
             if from_account.balance < amount:
                 raise ValueError("Insufficient funds in the source account.")
             # Debit the amount from the source account
-            from_account.balance = F('balance') - amount
+            from_account.balance = from_account.balance - amount
             from_account.save()
 
             to_account = Account.objects.get(account_no=to_account_no)
             # Credit the amount to the destination account
-            to_account.balance = F('balance') + amount
+            to_account.balance = to_account.balance + amount
             to_account.save()
         except ObjectDoesNotExist:
             print("Account does not exist.")
@@ -112,6 +117,7 @@ class Account(models.Model):
 3. เปิด Django shell และ ทำการ insert ข้อมูลในตาราง `Account`
 
 ```python
+>>> from account.models import Account
 >>> a1 = Account.objects.create(owner="A", account_no="001", balance=10000)
 
 >>> a2 = Account.objects.create(owner="B", account_no="002", balance=5000)
