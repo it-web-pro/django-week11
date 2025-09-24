@@ -23,13 +23,13 @@ VS Code จะทำการสร้างไฟล์ `launch.json` ขึ้
             "type": "debugpy",
             "request": "launch",
             "args": [
-                "runserver",
-                "8080"
+                "runserver"
             ],
             "django": true,
             "autoStartBrowser": false,
-            "python": "${workspaceFolder}/week11/myvenv/bin/python",
-            "program": "${workspaceFolder}/week11/week11_tutorial/manage.py"
+            "python": "${workspaceFolder}/myvenv/Scripts/python", # For Windows
+            "python": "${workspaceFolder}/myvenv/bin/python", # For MacOS
+            "program": "${workspaceFolder}/week11_tutorial/manage.py"
         }
     ]
 }
