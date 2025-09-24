@@ -143,6 +143,8 @@ class Account(models.Model):
 8. จากนั้นเรามาลองแก้ไข code เพื่อใช้งาน transaction กันดูครับ (อย่าลืม restart Django shell)
 
 ```python
+from django.core.exceptions import ObjectDoesNotExist
+
 ...
 
 def transfer_funds(self, to_account_no, amount):
@@ -152,12 +154,12 @@ def transfer_funds(self, to_account_no, amount):
             if from_account.balance < amount:
                 raise ValueError("Insufficient funds in the source account.")
             # Debit the amount from the source account
-            from_account.balance = F('balance') - amount
+            from_account.balance = from_account.balance - amount
             from_account.save()
 
             to_account = Account.objects.get(account_no=to_account_no)
             # Credit the amount to the destination account
-            to_account.balance = F('balance') + amount
+            to_account.balance = to_account.balance + amount
             to_account.save()
 
     except ObjectDoesNotExist:
