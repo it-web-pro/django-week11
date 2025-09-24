@@ -59,9 +59,8 @@ try:
                 files=request.FILES
             )
             if form2.is_valid():
-                form2.save()
-        else:
-            raise transaction.TransactionManagementError("Error")
+                form2.save()
+        raise transaction.TransactionManagementError("Error")
 except Exception:
 ```
 
